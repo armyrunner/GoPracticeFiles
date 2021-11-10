@@ -25,12 +25,20 @@ func PutMethod(c *gin.Context){
 	c.JSON(http.StatusOK, message)
 }
 
+func DeleteMethod(c *gin.Context){
+	fmt.Println("\napi.go 'DeleteMethod' called")
+	message := "DeleteMethod called"
+	c.JSON(http.StatusOK, message)
+}
+
+
 func main(){
 	router :=gin.Default()
 
 	router.POST("/", PostMethod)
 	router.GET("/",GetMethod)
 	router.PUT("/",PutMethod)
+	router.DELETE("/",DeleteMethod)
 
 	listenPort := "8080"
 	router.Run(":"+listenPort)
