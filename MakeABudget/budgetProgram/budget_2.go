@@ -1,11 +1,9 @@
-package module2
+package budgetProgram
 
 import (
 	"errors"
 	"time"
 )
-
-// START Initial code
 
 // Budget stores Budget information
 type Budget struct {
@@ -41,15 +39,11 @@ func (b Budget) CurrentCost() float32 {
 	return sum
 }
 
-var errDoesNotFitBudget = errors.New("Item does not fit the budget")
+var errDoesNotFitBudget = errors.New("item does not fit the budget")
 
-var errReportIsFull = errors.New("Report is full")
+var errReportIsFull = errors.New("report is full")
 
-var errDuplicateEntry = errors.New("Cannot add duplicate entry")
-
-// END Initial code
-
-// START Project code
+var errDuplicateEntry = errors.New("cannot add duplicate entry")
 
 // AddItem adds an item to the current budget
 func (b *Budget) AddItem(description string, price float32) error {
