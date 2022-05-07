@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	// bp "personal-budget/budgetProgram"
+	bp "personal-budget/budgetProgram"
 	"time"
 )
 
@@ -31,6 +31,7 @@ func createBudgetMenu() {
 		fmt.Printf("%v. %v\n",i , month )
 		i++
 	}
+
 }
 
 func transactionMenu(){
