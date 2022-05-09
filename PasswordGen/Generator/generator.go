@@ -3,6 +3,7 @@ package generator
 import (
 	"math/rand"
 	"strings"
+	"time"
 )
 
 var (
@@ -10,10 +11,10 @@ var (
 	upperCharSet   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	specialCharSet = "!#$%&<>*-~{}[]()|?@+=_:;"
 	numberSet      = "0123456789"
-	allChartSet    = lowerCharSet + upperCharSet + specialCharSet + numberSet 
+	allChartSet    = lowerCharSet + upperCharSet + specialCharSet + numberSet
 )
 
-func GeneratePassword(length, minSpecChar, minNum, minUpperCase, minLowerCase int) (string, error){
+func GeneratePassword(length, minSpecChar, minNum, minUpperCase, minLowerCase int) (string, error) {
 
 	var password strings.Builder
 
@@ -49,6 +50,7 @@ func GeneratePassword(length, minSpecChar, minNum, minUpperCase, minLowerCase in
 	}
 
 	//Get full password and shuffle it to make a good password
+	rand.Seed(time.Now().Unix())
 	newpassword := []rune(password.String())
 	rand.Shuffle(len(newpassword), func(i, j int) {
 		newpassword[i], newpassword[j] = newpassword[j], newpassword[i]
