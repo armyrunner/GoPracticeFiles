@@ -9,7 +9,7 @@ import (
 var (
 	lowerCharSet   = "abcdefghijklmnopqrstuvwxyz"
 	upperCharSet   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	specialCharSet = "!#$%&<>*-~{}[]()|?@+=_:;"
+	specialCharSet = "~`!@#$%^&*()_-+={[}]|:;'<,>.?/"
 	numberSet      = "0123456789"
 	allChartSet    = lowerCharSet + upperCharSet + specialCharSet + numberSet
 )
