@@ -1,12 +1,14 @@
-package generator
+package tests
 
 import (
 	"testing"
+
+	pg "passwordgen/Generator"
 )
 
 
 func TestGenertator(t *testing.T){
-	tests := []struct{
+	gen := []struct{
 		length    int
 		minChar   int
 		minNum    int
@@ -18,8 +20,8 @@ func TestGenertator(t *testing.T){
 		// {length: 16, minChar: 4, minNum: 3, minUpper: 3, minLower: 4},
 	}
 	
-	for _, test := range tests{
-		pass, _ := GeneratePassword(test.length, test.minChar, test.minNum, test.minUpper, test.minLower)
+	for _, test := range gen{
+		pass, _ := pg.GeneratePassword(test.length, test.minChar, test.minNum, test.minUpper, test.minLower)
 		if len(pass) != test.length{
 			t.FailNow()
 		}

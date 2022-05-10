@@ -1,8 +1,12 @@
 package main
 
-// "fmt"
-// "os"
-// pg "personal-genpassword/Generator"
+import (
+	"fmt"
+	"os"
+
+	// pg "passwordgen/Generator"
+	"passwordgen/filehelper"
+)
 
 func check(e error) {
 	if e != nil {
@@ -10,17 +14,17 @@ func check(e error) {
 	}
 }
 
-// func createPasswordFile(password string) {
-// 	f, err := os.Create("passfile")
-// 	check(err)
+func createPasswordFile(password string) {
+	f, err := os.Create("passfile")
+	check(err)
 
-// 	defer f.Close()
+	defer f.Close()
 
-// 	np := []byte(password)
-// 	_, err = f.Write(np)
-// 	check(err)
+	np := []byte(password)
+	_, err = f.Write(np)
+	check(err)
 
-// }
+}
 
 func main() {
 	// var length int
@@ -29,11 +33,7 @@ func main() {
 	// var minUpperCase int
 	// var minLowerCase int
 
-	name := "./newfile.json"
-	err := jf.getFileInfo(name)
-	if err != nil {
-		check(err)
-	}
+	name := "./JsonFile/newfile.json"
 
 	// fmt.Println("Welcome to the Password Generator!")
 
@@ -54,6 +54,8 @@ func main() {
 
 	// password, err := pg.GeneratePassword(length, minSpecChar, minNum, minUpperCase, minLowerCase)
 	// check(err)
+
+	filehelper.GetFileInfo(name)
 
 	// createPasswordFile(password)
 

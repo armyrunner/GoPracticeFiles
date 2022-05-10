@@ -1,4 +1,4 @@
-package filereader
+package filehelper
 
 type Accounts struct {
 	Accounts []Account `json:"Accounts"`

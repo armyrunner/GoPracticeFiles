@@ -1,14 +1,13 @@
-package filereader
+package filehelper
 
 import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
-
 )
 
-func getFileInfo(name string) error {
+func GetFileInfo(name string) (Name,URL,Username,Password string){
 
 	jf, err := os.Open(name)
 	if err != nil {
@@ -28,7 +27,5 @@ func getFileInfo(name string) error {
 		fmt.Printf("Username: %s", users.Accounts[i].Username)
 		fmt.Printf("Password: %s", users.Accounts[i].Password)
 	}
-
-	return nil
 
 }
