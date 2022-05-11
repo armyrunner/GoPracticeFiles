@@ -31,6 +31,6 @@ func PostgresConnStr(host string,port int,user ,password ,dbname string)(string,
     err = db.Ping()
     check(err)
 
-    fmt.Printf()
+    fmt.Printf("\nSuccessfully connected to database!\n")
 
   }
