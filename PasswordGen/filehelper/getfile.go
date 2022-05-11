@@ -7,25 +7,27 @@ import (
 	"os"
 )
 
-func GetFileInfo(name string) (Name,URL,Username,Password string){
+func GetFileInfo(name string) {
 
 	jf, err := os.Open(name)
 	if err != nil {
-		fmt.Println("Can't open file or file doesn't exist", err)
+		panic(err)
 	}
 
 	defer jf.Close()
 
+	fmt.Println("Sucessfully Opened file.")
+
 	byteValue, _ := ioutil.ReadAll(jf)
 
 	var users Accounts
-	json.Unmarshal([]byte(byteValue), &users)
+	json.Unmarshal(byteValue, &users)
 
-	for i := 0; i < len(users.Accounts); i++ {
-		fmt.Printf("Name: %s", users.Accounts[i].Name)
-		fmt.Printf("URL: %s", users.Accounts[i].URL)
-		fmt.Printf("Username: %s", users.Accounts[i].Username)
-		fmt.Printf("Password: %s", users.Accounts[i].Password)
+	for i := 0; i < len(users.Accounts); i++{
+		fmt.Println("Name: " + users.Accounts[i].Name)
+		fmt.Println("URL: " + users.Accounts[i].URL)
+		fmt.Println("Username: " + users.Accounts[i].Username)
+		fmt.Println("Password: " + users.Accounts[i].Password)
 	}
 
 }

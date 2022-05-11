@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	// pg "passwordgen/Generator"
-	"passwordgen/filehelper"
+	// pg "passwordgen/generator"
+	db "passwordgen/dbconnection"
 )
 
 func check(e error) {
@@ -32,8 +32,13 @@ func main() {
 	// var minNum int
 	// var minUpperCase int
 	// var minLowerCase int
+	// var name string
 
-	name := "./JsonFile/newfile.json"
+	var host string
+	var port int
+	var user string
+	var password string
+	var dbname string
 
 	// fmt.Println("Welcome to the Password Generator!")
 
@@ -55,7 +60,24 @@ func main() {
 	// password, err := pg.GeneratePassword(length, minSpecChar, minNum, minUpperCase, minLowerCase)
 	// check(err)
 
-	filehelper.GetFileInfo(name)
+	// fmt.Print("Where is your json file located -> ")
+	// fmt.Scan(&name)
+
+	fmt.Print("Connect to the database \n")
+	fmt.Print("Host: ")
+	fmt.Scan(&host)
+	fmt.Print("Port: ")
+	fmt.Scan(&port)
+	fmt.Print("User: ")
+	fmt.Scan(&user)
+	fmt.Print("Password: ")
+	fmt.Scan(&password)
+	fmt.Print("DBName: ")
+	fmt.Scan(&dbname)
+
+	constr, err := db.PostgresConnStr(host, port, user, password, dbname)
+	check(err)
+	fmt.Print(constr)
 
 	// createPasswordFile(password)
 
