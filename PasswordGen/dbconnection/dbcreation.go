@@ -40,6 +40,7 @@ func DBConn(host string, port int ,username ,password ,dbname string)(string,err
   func InsertIntoDB(Name,URL,Username,Password string)(*sql.DB,error){
 
     
+    
   }
 
 

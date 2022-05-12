@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 )
-
+// Google Regex 
 var (
 	lowerCharSet   = "abcdefghijklmnopqrstuvwxyz"
 	upperCharSet   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
