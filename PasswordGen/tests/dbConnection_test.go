@@ -20,7 +20,7 @@ func TestDBConnectionStr(t *testing.T) {
 	}
 
 	for _, dbTestStr := range ConnStr {
-		constr, _ := db.PostgresConnStr(dbTestStr.host, dbTestStr.port, dbTestStr.username, dbTestStr.password, dbTestStr.dbname)
+		constr, _ := db.DBConn(dbTestStr.host, dbTestStr.port, dbTestStr.username, dbTestStr.password, dbTestStr.dbname)
 		fmt.Printf("constr: %v\n", constr)
 	}
 
