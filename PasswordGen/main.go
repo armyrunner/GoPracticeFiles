@@ -35,7 +35,7 @@ func main() {
 	// var name string
 
 	var host string
-	var port int
+	var port string
 	var user string
 	var password string
 	var dbname string
