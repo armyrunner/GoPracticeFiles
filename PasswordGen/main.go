@@ -2,83 +2,104 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"log"
 
-	// pg "passwordgen/generator"
 	db "passwordgen/dbconnection"
+	pg "passwordgen/generator"
 )
 
 func check(e error) {
 	if e != nil {
-		panic(e)
+		log.Printf("Error %s", e)
+		return
 	}
 }
 
-func createPasswordFile(password string) {
-	f, err := os.Create("passfile")
-	check(err)
-
-	defer f.Close()
-
-	np := []byte(password)
-	_, err = f.Write(np)
-	check(err)
-
-}
+func CalcPassChar()
 
 func main() {
-	// var length int
-	// var minSpecChar int
-	// var minNum int
-	// var minUpperCase int
-	// var minLowerCase int
-	// var name string
-
-	var host string
-	var port string
-	var user string
-	var password string
+	var length int
+	var minSpecChar int
+	var minNum int
+	var minUpperCase int
+	var minLowerCase int
+	var webName string
+	var URL string
+	var uname string
+	var pword string
 	var dbname string
 
-	// fmt.Println("Welcome to the Password Generator!")
+	fmt.Println("Welcome to the Password Generator!")
 
-	// fmt.Print("Length of Your Password -> ")
-	// fmt.Scan(&length)
+	fmt.Print("Length of Your Password -> ")
+	fmt.Scan(&length)
 
-	// fmt.Print("Number of Special Characters -> ")
-	// fmt.Scan(&minSpecChar)
+	fmt.Print("Number of Special Characters -> ")
+	fmt.Scan(&minSpecChar)
 
-	// fmt.Print("How many numbers in the password -> ")
-	// fmt.Scan(&minNum)
+	fmt.Print("How many numbers in the password -> ")
+	fmt.Scan(&minNum)
 
-	// fmt.Print("Number of Upper Case Letters do you need -> ")
-	// fmt.Scan(&minUpperCase)
+	fmt.Print("Number of Upper Case Letters do you need -> ")
+	fmt.Scan(&minUpperCase)
 
-	// fmt.Print("Number of Lower Case Letters do you need -> ")
-	// fmt.Scan(&minLowerCase)
+	fmt.Print("Number of Lower Case Letters do you need -> ")
+	fmt.Scan(&minLowerCase)
 
-	// password, err := pg.GeneratePassword(length, minSpecChar, minNum, minUpperCase, minLowerCase)
-	// check(err)
+	password, err := pg.GeneratePassword(length, minSpecChar, minNum, minUpperCase, minLowerCase)
+	check(err)
 
-	// fmt.Print("Where is your json file located -> ")
-	// fmt.Scan(&name)
+	fmt.Print("Connect and Create a Database \n")
 
-	fmt.Print("Connect to the database \n")
-	fmt.Print("Host: ")
-	fmt.Scan(&host)
-	fmt.Print("Port: ")
-	fmt.Scan(&port)
-	fmt.Print("User: ")
-	fmt.Scan(&user)
-	fmt.Print("Password: ")
-	fmt.Scan(&password)
 	fmt.Print("DBName: ")
 	fmt.Scan(&dbname)
 
-	constr, err := db.PostgresConnStr(host, port, user, password, dbname)
+	newdb, err := db.CreateDB(dbname)
 	check(err)
-	fmt.Print(constr)
 
-	// createPasswordFile(password)
+	fmt.Print("What is Name to save for the website? -> ")
+	fmt.Scan(&webName)
+
+	fmt.Print("What is the URL for the website? -> ")
+	fmt.Scan(&URL)
+
+	fmt.Print("What is the Username? -> ")
+	fmt.Scan(&uname)
+
+	pword = password
+
+	fmt.Print("What is the Web Name to Username and Password -> ")
+	fmt.Scan(&webName)
+
+	defer newdb.Close()
+
+	newdb, err = db.OpenDB(dbname)
+	check(err)
+
+	err = db.CreateTables(newdb)
+	check(err)
+
+	err = db.InsertIntoDB(webName, URL, uname, pword, newdb)
+	check(err)
+
+	username, password, err := db.SelectingAUser(webName, newdb)
+	check(err)
+
+	fmt.Printf("Username: %s\n", username)
+	fmt.Printf("Password: %v\n", password)
+
+	// fmt.Print("What Account do you not use anymore -> ")
+	// fmt.Scan(&webName)
+
+	// err = db.DeleteUserInfo(webName, newdb)
+	// if err != nil {
+	// 	log.Printf("Error %s", err)
+	// 	return
+	// }
+
+	err = db.UpdateIntoDB(webName, password, newdb)
+	check(err)
 
 }
+
+

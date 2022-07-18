@@ -1,4 +1,4 @@
-package filehelper
+package dbconnection
 
 import (
 	"encoding/json"
